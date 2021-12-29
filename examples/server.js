@@ -27,6 +27,7 @@ router.get('/base/get', function(req, res) {
 })
 
 router.post('/base/post', function(req, res) {
+  console.log(req.body)
   res.json(req.body) // 请求头的content-type需要设置成application/json，默认为text/plain。无法解析
 })
 
@@ -49,7 +50,7 @@ app.use(webpackHotMiddleware(compiler))
 app.use(express.static(__dirname))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
-const port = process.env.PORT || 8081
+const port = process.env.PORT || 8080
 module.exports = app.listen(port, () => {
   console.log(`Server listening on http://localhost:${port}, Ctrl+C to stop`)
 })

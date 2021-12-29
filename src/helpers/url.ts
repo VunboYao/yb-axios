@@ -1,31 +1,31 @@
-import {isDate, isObject} from './util'
+import { isDate, isObject } from './util'
 
-function encode(val:string):string{
+function encode(val: string): string {
   return encodeURIComponent(val)
     .replace(/%40/g, '@')
-    .replace(/%3A/ig, ':')
+    .replace(/%3A/gi, ':')
     .replace(/%24/g, '$')
-    .replace(/%2C/ig, ',')
+    .replace(/%2C/gi, ',')
     .replace(/%20/g, '+')
-    .replace(/%5B/ig, '[')
-    .replace(/%5D/ig, ']')
+    .replace(/%5B/gi, '[')
+    .replace(/%5D/gi, ']')
 }
 
-export function buildURL(url:string,params?:any):string {
+export function buildURL(url: string, params?: any): string {
   if (!params) return url
 
-  const parts:string[] = []
+  const parts: string[] = []
   Object.keys(params).forEach(key => {
     const val = params[key]
     // todo: 空值忽略
     if (val === null || typeof val === 'undefined') {
-      return // 下一次循环
+      return // 进入下一次循环
     }
-    let values = []
+    let values: any[]
     // todo: 数组、对象的处理
     if (Array.isArray(val)) {
       values = val
-      key += '[]'
+      key += '[]' // foo[]=bar&foo[]=baz
     } else {
       values = [val]
     }
