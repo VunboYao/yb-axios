@@ -22,12 +22,16 @@ router.get('/simple/get', function(req, res) {
   })
 })
 
+router.get('/base/get', function(req, res) {
+  res.json(req.query)
+})
+
 app.use(router)
 app.use(webpackHotMiddleware(compiler))
 app.use(express.static(__dirname))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 8081
 module.exports = app.listen(port, () => {
   console.log(`Server listening on http://localhost:${port}, Ctrl+C to stop`)
 })
