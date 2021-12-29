@@ -79,14 +79,22 @@ axios({
   },
   data: {
     a: 1,
-    b: 2
+    b: 2,
+    c: ['a', 'b']
   }
 })
 
+const arr = new Int32Array([21, 31])
+
+axios({
+  method: 'post',
+  url: '/base/buffer',
+  data: arr
+})
 
 const paramsString = 'q=URLUtils.searchParams&topic=api'
 const searchParams = new URLSearchParams(paramsString)
-
+searchParams.append('foo', String(4))
 axios({
   method: 'post',
   url: '/base/post',

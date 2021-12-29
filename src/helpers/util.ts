@@ -1,6 +1,6 @@
 export function getType(val: any): string {
   const type = typeof val
-  if(typeof type !== 'object') {
+  if (type !== 'object') {
     return type
   }
   return Object.prototype.toString.call(val).replace(/^\[object (\S+)]$/, (match, $1) => {
