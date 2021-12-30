@@ -1,6 +1,7 @@
 import { AxiosRequestConfig, AxiosResponse } from '../types'
 
 export class AxiosError extends Error {
+  // todo:与es6的区别，需要先定义实例属性，才能够使用实例属性
   isAxiosError: Boolean
   config: AxiosRequestConfig
   code?: string | null
