@@ -1,4 +1,5 @@
 import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from './types'
+import { parseHeaders } from './helpers/headers'
 
 export default function xhr(config: AxiosRequestConfig): AxiosPromise {
   return new Promise(resolve => {
@@ -18,7 +19,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
        * 当前处在请求/响应过程的哪个阶段
        * 0：未初始化(Uninitialized).尚未调用open方法
        * 1：已打开(Open).以调用open方法，尚未调用send()方法
-       * 2：已发送(Sten).已调用send方法，尚未收到响应
+       * 2：已发送(Send).已调用send方法，尚未收到响应
        * 3：接收中(Receiving).已收到部分响应
        * 4: 完成(Complete).已经收到所有响应，可以使用
        * */
@@ -26,7 +27,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
         return
       }
       // 从XHR对象获取响应头部
-      const responseHeaders = request.getAllResponseHeaders()
+      const responseHeaders = parseHeaders(request.getAllResponseHeaders())
       const responseData = responseType !== 'text' ? request.response : request.responseText
       const response: AxiosResponse = {
         data: responseData,
