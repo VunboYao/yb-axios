@@ -9,7 +9,7 @@ interface Interceptor<T> {
  * todo: 拦截器方法。use和eject实现
  * */
 export default class InterceptorManage<T> {
-  private interceptors: Array<Interceptor<T> | null>
+  private readonly interceptors: Array<Interceptor<T> | null>
 
   constructor() {
     this.interceptors = []
