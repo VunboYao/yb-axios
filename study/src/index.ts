@@ -1,13 +1,9 @@
-import './demo'
-function foo(a: number, b: number) {
-  return a + b
+import './index.less'
+import GameControl from './modules/GameControl'
+
+
+window.onload = function () {
+  new GameControl()
 }
 
-let c = foo(1, 20)
-console.log(c);
 
-const obj = {
-  demo: 'abc'
-}
-console.log(obj.demo);
-console.log(Promise);

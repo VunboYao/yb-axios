@@ -1,5 +1,6 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 module.exports = {
   mode: 'development',
   entry: "./src/index.ts",
@@ -9,7 +10,8 @@ module.exports = {
     filename: 'bundle.js',
     clean: true,
     environment: {
-      arrowFunction: false
+      arrowFunction: false,
+      const: false
     }
   },
   resolve: {
@@ -41,12 +43,31 @@ module.exports = {
           'ts-loader'
         ],
         exclude: /node_modules/
-      }
+      },
+      {
+        test: /\.less$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', {
+          loader: 'postcss-loader',
+          options: {
+            postcssOptions: {
+              plugins: [[
+                'postcss-preset-env',
+                {
+                  browsers: 'last 2 versions'
+                }
+              ]]
+            }
+          }
+        }, 'less-loader'],
+      },
     ]
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Hello TS'
+      template: './src/index.html'
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].[contenthash:6].css'
     })
   ]
 }
