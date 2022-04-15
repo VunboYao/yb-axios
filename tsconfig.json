@@ -1,5 +1,6 @@
 {
-  "compilerOptions": {
+  "extends": "@vunbo/config-ts",
+  /* "compilerOptions": {
     "moduleResolution": "node",
     "target": "es5",
     "module":"es2015",
@@ -15,7 +16,7 @@
     "typeRoots": [
       "node_modules/@types"
     ]
-  },
+  }, */
   "include": [
     "src"
   ]
