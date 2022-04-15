@@ -1,7 +1,6 @@
-const webpack = require('webpack')
 const fs = require('fs')
 const path = require('path')
-
+const webpack = require('webpack')
 
 module.exports = {
   mode: 'development',
@@ -26,31 +25,31 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '__build__'),
     filename: '[name].js', // 以入口名称命名 simple error等
-    publicPath: '/__build__/'
+    publicPath: '/__build__/',
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js']
+    extensions: ['.ts', '.tsx', '.js'],
   },
   module: {
     rules: [
       {
         test: /\.ts$/,
         enforce: 'pre', // 前置执行
-        use: 'tslint-loader'
+        use: 'tslint-loader',
       },
       {
         test: /\.tsx?$/,
         use: [{
           loader: 'ts-loader',
           options: {
-            transpileOnly: true
-          }
-        }]
-      }
-    ]
+            transpileOnly: true,
+          },
+        }],
+      },
+    ],
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
-  ]
+    new webpack.NoEmitOnErrorsPlugin(),
+  ],
 }
