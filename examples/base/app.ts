@@ -76,7 +76,7 @@ axios({
   url: '/base/post',
   headers: {
     'content-type': 'application/json',
-    'Accept': 'application/json, text/plain, *!/!*',
+    'Accept': 'application/json, text/plain, */*',
   },
   data: {
     a: 1,
