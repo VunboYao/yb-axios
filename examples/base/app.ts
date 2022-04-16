@@ -1,5 +1,6 @@
 import axios from '../../src/index'
 
+/*
 axios({
   method: 'get',
   url: '/base/get',
@@ -59,15 +60,15 @@ axios({
   params: {
     bar: 'baz',
   },
-})
+}) */
 
-/* axios({
+axios({
   method: 'post',
   url: '/base/post',
   data: {
     a: 1,
-    b: 2
-  }
+    b: 2,
+  },
 })
 
 axios({
@@ -75,13 +76,13 @@ axios({
   url: '/base/post',
   headers: {
     'content-type': 'application/json',
-    'Accept': 'application/json, text/plain, *!/!*'
+    'Accept': 'application/json, text/plain, *!/!*',
   },
   data: {
     a: 1,
     b: 2,
-    c: ['a', 'b']
-  }
+    c: ['a', 'b'],
+  },
 })
 
 const arr = new Int32Array([21, 31])
@@ -89,7 +90,7 @@ const arr = new Int32Array([21, 31])
 axios({
   method: 'post',
   url: '/base/buffer',
-  data: arr
+  data: arr,
 })
 
 const paramsString = 'q=URLUtils.searchParams&topic=api'
@@ -98,8 +99,8 @@ searchParams.append('foo', String(4))
 axios({
   method: 'post',
   url: '/base/post',
-  data: searchParams
-}) */
+  data: searchParams,
+})
 
 /* axios({
   method: 'post',
