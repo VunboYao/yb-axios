@@ -62,7 +62,7 @@ axios({
   },
 }) */
 
-axios({
+/* axios({
   method: 'post',
   url: '/base/post',
   data: {
@@ -76,16 +76,16 @@ axios({
   url: '/base/post',
   headers: {
     'content-type': 'application/json',
-    'Accept': 'application/json, text/plain, */*',
+    'Accept': 'application/json, text/plain, *!/!*',
   },
   data: {
     a: 1,
     b: 2,
     c: ['a', 'b'],
   },
-})
+}) */
 
-const arr = new Int32Array([21, 31])
+/* const arr = new Int32Array([21, 31])
 
 axios({
   method: 'post',
@@ -100,15 +100,15 @@ axios({
   method: 'post',
   url: '/base/post',
   data: searchParams,
-})
+}) */
 
-/* axios({
+axios({
   method: 'post',
   url: '/base/post',
   data: {
     a: 1,
-    b: 2
-  }
+    b: 2,
+  },
 }).then((res) => {
   console.log(res)
 })
@@ -119,8 +119,8 @@ axios({
   responseType: 'json',
   data: {
     a: 3,
-    b: 4
-  }
+    b: 4,
+  },
 }).then((res) => {
   console.log(res)
-}) */
+})
