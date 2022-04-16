@@ -21,3 +21,21 @@ function normalizeHeaderName(headers: any, normalizedName: string): any {
   })
   return headers
 }
+
+export function parseHeaders(headers: string): any {
+  const parsed = Object.create(null)
+  if (!headers) {
+    return parsed
+  }
+
+  headers.split('\r\n').forEach((line) => {
+    let [key, val] = line.split(':')
+    key = key.trim().toLocaleLowerCase()
+    if (!key) { return }
+    if (val) {
+      val = val.trim()
+    }
+    parsed[key] = val
+  })
+  return parsed
+}
