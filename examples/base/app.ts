@@ -1,11 +1,11 @@
 import axios from '../../src/index'
 
-/*axios({
+axios({
   method: 'get',
   url: '/base/get',
   params: {
-    foo: ['bar', 'baz']
-  }
+    foo: ['bar', 'baz'],
+  },
 })
 
 axios({
@@ -13,9 +13,9 @@ axios({
   url: '/base/get',
   params: {
     foo: {
-      bar: 'baz'
-    }
-  }
+      bar: 'baz',
+    },
+  },
 })
 
 const date = new Date()
@@ -24,16 +24,16 @@ axios({
   method: 'get',
   url: '/base/get',
   params: {
-    date
-  }
+    date,
+  },
 })
 
 axios({
   method: 'get',
   url: '/base/get',
   params: {
-    foo: '@:$, '
-  }
+    foo: '@:$, ',
+  },
 })
 
 axios({
@@ -41,27 +41,27 @@ axios({
   url: '/base/get',
   params: {
     foo: 'null data',
-    baz: null
-  }
+    baz: null,
+  },
 })
 
 axios({
   method: 'get',
   url: '/base/get#hash',
   params: {
-    foo: 'bar'
-  }
+    foo: 'bar',
+  },
 })
 
 axios({
   method: 'get',
   url: '/base/get?foo=bar',
   params: {
-    bar: 'baz'
-  }
-})*/
+    bar: 'baz',
+  },
+})
 
-/*axios({
+/* axios({
   method: 'post',
   url: '/base/post',
   data: {
@@ -99,9 +99,9 @@ axios({
   method: 'post',
   url: '/base/post',
   data: searchParams
-})*/
+}) */
 
-axios({
+/* axios({
   method: 'post',
   url: '/base/post',
   data: {
@@ -122,4 +122,4 @@ axios({
   }
 }).then((res) => {
   console.log(res)
-})
+}) */

@@ -7,7 +7,7 @@ export function buildUrl(url: string, params?: any): string {
 
   // 参数放入一个数组中，方便后续处理
   const parts: string[] = []
-  Object.keys(params).forEach(key => {
+  Object.keys(params).forEach((key) => {
     const val = params[key]
     // todo:val值为 null 或 undefined
     if (val === null || typeof val === 'undefined') {
@@ -23,7 +23,7 @@ export function buildUrl(url: string, params?: any): string {
       values = [val]
     }
 
-    values.forEach(val => {
+    values.forEach((val) => {
       // todo: val为date类型时
       if (isDate(val)) {
         val = val.toISOString()

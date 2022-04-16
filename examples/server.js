@@ -84,8 +84,7 @@ function registerBaseRouter() {
   router.post('/base/buffer', (req, res) => {
     const msg = []
     req.on('data', (chunk) => {
-      if (chunk)
-        msg.push(chunk)
+      if (chunk) { msg.push(chunk) }
     })
     req.on('end', () => {
       const buf = Buffer.concat(msg)
@@ -100,8 +99,7 @@ function registerErrorRouter() {
       res.json({
         msg: 'hello world',
       })
-    }
-    else {
+    } else {
       res.status(500)
       res.end()
     }
@@ -202,8 +200,7 @@ function registerMoreRouter() {
     const [username, password] = atob(credentials).split(':')
     if (type === 'Basic' && username === 'Yee' && password === '123456') {
       res.json(req.body)
-    }
-    else {
+    } else {
       res.status(401)
       res.end('UnAuthorization')
     }
