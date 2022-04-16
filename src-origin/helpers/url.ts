@@ -1,5 +1,6 @@
 import { isDate, isObject } from './util'
 
+// 对特殊字符进行处理
 function encode(val: string): string {
   return encodeURIComponent(val)
     .replace(/%40/g, '@')
@@ -12,10 +13,10 @@ function encode(val: string): string {
 }
 
 export function buildURL(url: string, params?: any): string {
-  if (!params) return url
+  if (!params) { return url }
 
   const parts: string[] = []
-  Object.keys(params).forEach(key => {
+  Object.keys(params).forEach((key) => {
     const val = params[key]
     // todo: 空值忽略
     if (val === null || typeof val === 'undefined') {
@@ -29,18 +30,19 @@ export function buildURL(url: string, params?: any): string {
     } else {
       values = [val]
     }
-    values.forEach(val => {
+    values.forEach((val) => {
       // todo: Date类型的处理
       if (isDate(val)) {
         val = val.toISOString()
       } else if (isObject(val)) {
+        // todo: 参数是对象类型
         val = JSON.stringify(val)
       }
       // todo: 特殊字符处理
       parts.push(`${encode(key)}=${encode(val)}`)
     })
   })
-  let serializedParams = parts.join('&')
+  const serializedParams = parts.join('&')
   if (serializedParams) {
     // todo：忽略hash
     const markIndex = url.indexOf('#')
@@ -48,7 +50,7 @@ export function buildURL(url: string, params?: any): string {
       url = url.slice(0, markIndex)
     }
     // todo: 有？则拼接&     没有则拼接 ?
-    url += (url.indexOf('?') === -1 ? '?' : '&') + serializedParams
+    url += (!url.includes('?') ? '?' : '&') + serializedParams
   }
   return url
 }
