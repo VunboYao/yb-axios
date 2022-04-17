@@ -1,16 +1,28 @@
 import { transformResponse } from './helpers/data'
 import { parseHeaders } from './helpers/headers'
 import type { AxiosPromise, AxiosRequestConfig, AxiosResponse } from './types'
+import { createError } from './helpers/error'
 
 export default function xhr(config: AxiosRequestConfig): AxiosPromise {
-  return new Promise((resolve) => {
-    const { data = null, url, method = 'get', headers, responseType } = config
+  return new Promise((resolve, reject) => {
+    const {
+      data = null,
+      url,
+      method = 'get',
+      headers,
+      responseType,
+      timeout,
+    } = config
 
     // todo:1-创建xhr实例
     const request = new XMLHttpRequest()
 
     if (responseType) {
       request.responseType = responseType
+    }
+
+    if (timeout) {
+      request.timeout = timeout
     }
 
     // todo：5-readyState变化监听。保证跨浏览器兼容性，应该在open之前调用
@@ -25,7 +37,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
        * */
       if (request.readyState !== 4) { return }
 
-      // network error / error, 错误时，HTTP状态码为0
+      // network error / timeout error, 错误时，HTTP状态码为0
       if (request.status === 0) { return }
 
       // 从XHR对象获取响应头部信息
@@ -39,7 +51,35 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
         config,
         request,
       }
-      resolve(response)
+      handleResponse(response)
+    }
+
+    function handleResponse(response: AxiosResponse): void {
+      if (response.status >= 200 && response.status < 300) {
+        resolve(response)
+      } else {
+        reject(createError(`Request failed with status code ${response.status}`,
+          config,
+          null,
+          request,
+          response))
+      }
+    }
+
+    // todo:6-处理网络错误
+    request.onerror = function handleError() {
+      reject(createError('Network Error',
+        config,
+        null,
+        request))
+    }
+
+    // todo:7-timeout
+    request.ontimeout = function handleTimeout() {
+      reject(createError(`Timeout of ${timeout} ms exceeded`,
+        config,
+        'ECONNABORTED',
+        request))
     }
 
     // todo:2-method大写，是否执行异步操作，默认true

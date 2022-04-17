@@ -21,6 +21,7 @@ export interface AxiosRequestConfig {
   params?: any // get，head等类型请求的数据
   headers?: any // 请求头信息：Content-Type：application/json;charset=utf-8 声明等
   responseType?: XMLHttpRequestResponseType // 接收的返回数据类型 "" | "arraybuffer" | "blob" | "document" | "json" | "text"
+  timeout?: number // 超时时间 ms
 }
 
 export interface AxiosResponse {
@@ -34,3 +35,11 @@ export interface AxiosResponse {
 
 // todo: Axios的返回Promise类型，resolve函数的参数为AxiosResponse类型
 export interface AxiosPromise extends Promise<AxiosResponse> {}
+
+export interface AxiosError extends Error {
+  config: AxiosRequestConfig
+  code?: string
+  request?: any
+  response?: AxiosResponse
+  isAxiosError: boolean
+}
