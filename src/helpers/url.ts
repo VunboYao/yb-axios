@@ -1,4 +1,14 @@
 import { isDate, isObject } from './util'
+
+/*
+* 参数值为数组：/base/get?foo[]=bar&foo[]=baz
+* 参数值为对象：encode 对象
+* 参数为 Date 类型：拼接 date.toISOString()的结果
+* 特殊字符支持：对于字符 @、:、$、,、、[、]，我们是允许出现在 url 中的，不希望被 encode
+* 空值忽略：对于值为 null 或 undefined 的属性，不添加到 url 参数中
+* 丢弃 url 中的哈希标记：#hash移除
+* 保留url中已存在的参数
+*/
 export function buildUrl(url: string, params?: any): string {
   // 无参数则退出
   if (!params) {

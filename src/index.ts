@@ -3,6 +3,7 @@ import xhr from './xhr'
 import { buildUrl } from './helpers/url'
 import { transformRequest } from './helpers/data'
 import { processHeaders } from './helpers/headers'
+
 function axios(config: AxiosRequestConfig): AxiosPromise {
   processConfig(config)
   return xhr(config)
