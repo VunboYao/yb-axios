@@ -1,19 +1,19 @@
 import axios from '../../src/index'
 
-/*axios({
+axios({
   url: '/extend/post',
   method: 'post',
   data: {
-    msg: 'hi'
-  }
+    msg: 'hi',
+  },
 })
 
 axios.request({
   url: '/extend/post',
   method: 'post',
   data: {
-    msg: 'hello'
-  }
+    msg: 'hello',
+  },
 })
 
 axios.get('/extend/get')
@@ -28,8 +28,9 @@ axios.post('/extend/post', { msg: 'post' })
 
 axios.put('/extend/put', { msg: 'put' })
 
-axios.patch('/extend/patch', { msg: 'patch' })*/
+axios.patch('/extend/patch', { msg: 'patch' })
 
+/*
 axios({
   url: '/extend/post',
   method: 'post',
@@ -62,7 +63,6 @@ function getUser<T>() {
     .catch(err => console.error(err))
 }
 
-
 async function test() {
   const user = await getUser<User>()
   if (user) {
@@ -71,3 +71,4 @@ async function test() {
 }
 
 test()
+*/

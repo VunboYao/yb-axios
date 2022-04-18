@@ -1,7 +1,7 @@
-import { transformResponse } from './helpers/data'
-import { parseHeaders } from './helpers/headers'
-import type { AxiosPromise, AxiosRequestConfig, AxiosResponse } from './types'
-import { createError } from './helpers/error'
+import { transformResponse } from '../helpers/data'
+import { parseHeaders } from '../helpers/headers'
+import type { AxiosPromise, AxiosRequestConfig, AxiosResponse } from '../types'
+import { createError } from '../helpers/error'
 
 export default function xhr(config: AxiosRequestConfig): AxiosPromise {
   return new Promise((resolve, reject) => {
@@ -83,7 +83,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
     }
 
     // todo:2-method大写，是否执行异步操作，默认true
-    request.open(method.toUpperCase(), url, true)
+    request.open(method.toUpperCase(), url!, true)
 
     // todo:3-setRequestHeader 只能在 open 和 send 之间调用
     Object.keys(headers).forEach((name) => {
