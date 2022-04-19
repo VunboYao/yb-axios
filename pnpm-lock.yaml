@@ -8,6 +8,7 @@ specifiers:
   '@types/node': ^10.11.0
   '@types/qs': ^6.9.7
   '@vunbo/config-ts': ^1.0.3
+  atob: ^2.1.2
   body-parser: ^1.18.3
   colors: ^1.3.2
   commitizen: ^3.0.0
@@ -53,6 +54,7 @@ specifiers:
 dependencies:
   '@antfu/eslint-config': 0.20.6_eslint@8.13.0+typescript@3.9.10
   '@vunbo/config-ts': 1.0.5
+  atob: 2.1.2
   eslint: 8.13.0
 
 devDependencies:
@@ -2502,7 +2504,6 @@ packages:
     resolution: {integrity: sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==}
     engines: {node: '>= 4.5.0'}
     hasBin: true
-    dev: true
 
   /aws-sign2/0.7.0:
     resolution: {integrity: sha1-tG6JCTSpWR8tL2+G1+ap8bP+dqg=}

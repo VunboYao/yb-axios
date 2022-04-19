@@ -131,6 +131,7 @@
   "dependencies": {
     "@antfu/eslint-config": "^0.20.6",
     "@vunbo/config-ts": "^1.0.3",
+    "atob": "^2.1.2",
     "eslint": "^8.13.0"
   }
 }

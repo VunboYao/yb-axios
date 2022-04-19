@@ -60,4 +60,6 @@ export interface Axios {
 // 混合类型接口
 export interface AxiosInstance extends Axios {
   (config: AxiosRequestConfig): AxiosPromise
+
+  (url: string, config?: AxiosRequestConfig): AxiosPromise
 }
