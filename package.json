@@ -37,7 +37,6 @@
   },
   "lint-staged": {
     "{src,test}/**/*.ts": [
-      "prettier --write",
       "git add"
     ]
   },
@@ -130,7 +129,7 @@
     "webpack-hot-middleware": "^2.24.3"
   },
   "dependencies": {
-    "@antfu/eslint-config": "^0.20.2",
+    "@antfu/eslint-config": "^0.20.6",
     "@vunbo/config-ts": "^1.0.3",
     "eslint": "^8.13.0"
   }
