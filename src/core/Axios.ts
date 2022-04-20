@@ -1,7 +1,23 @@
-import type { AxiosPromise, AxiosRequestConfig, Axios as AxiosType, Method } from '../types'
+import type { AxiosPromise, AxiosRequestConfig, Axios as AxiosType, Interceptors, Method, RejectedFn, ResolvedFn } from '../types'
+import type { AxiosResponse } from './../../src-origin/types/index'
 import dispatchRequest from './dispatchRequest'
+import InterceptorManager from './interceptor'
+
+interface PromiseChain {
+  resolved: ResolvedFn | ((config: AxiosRequestConfig) => AxiosPromise)
+  rejected?: RejectedFn
+}
 
 export default class Axios implements AxiosType {
+  interceptors: Interceptors
+
+  constructor() {
+    this.interceptors = {
+      request: new InterceptorManager<AxiosRequestConfig>(),
+      response: new InterceptorManager<AxiosResponse>(),
+    }
+  }
+
   request(url: any, config?: any): AxiosPromise {
     if (typeof url === 'string') {
       if (!config) {
@@ -11,7 +27,26 @@ export default class Axios implements AxiosType {
     } else {
       config = url
     }
-    return dispatchRequest(config)
+
+    const chain: PromiseChain[] = [{
+      resolved: dispatchRequest,
+      rejected: undefined,
+    }]
+
+    this.interceptors.request.forEach((interceptor) => {
+      chain.unshift(interceptor)
+    })
+
+    this.interceptors.response.forEach((interceptor) => {
+      chain.push(interceptor)
+    })
+    let promise = Promise.resolve(config)
+    while (chain.length) {
+      const { resolved, rejected } = chain.shift()!
+      promise = promise.then(resolved, rejected)
+    }
+
+    return promise
   }
 
   get(url: string, config?: AxiosRequestConfig): AxiosPromise {

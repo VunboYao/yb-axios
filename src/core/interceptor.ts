@@ -1,5 +1,4 @@
-import type { RejectedFn, ResolvedFn } from '../types'
-import type { AxiosInterceptorManager } from './../../src-origin/types/index'
+import type { AxiosInterceptorManager, RejectedFn, ResolvedFn } from '../types'
 
 interface Interceptor<T> {
   resolved: ResolvedFn<T>
