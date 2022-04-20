@@ -1,4 +1,4 @@
-import type InterceptorManager from '../core/interceptor'
+import type InterceptorManager from '../core/interceptorManager'
 export type Method =
   | 'get'
   | 'GET'

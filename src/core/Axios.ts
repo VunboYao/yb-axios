@@ -1,10 +1,10 @@
 import type { AxiosPromise, AxiosRequestConfig, Axios as AxiosType, Interceptors, Method, RejectedFn, ResolvedFn } from '../types'
 import type { AxiosResponse } from './../../src-origin/types/index'
 import dispatchRequest from './dispatchRequest'
-import InterceptorManager from './interceptor'
+import InterceptorManager from './interceptorManager'
 
-interface PromiseChain {
-  resolved: ResolvedFn | ((config: AxiosRequestConfig) => AxiosPromise)
+interface PromiseChain<T> {
+  resolved: ResolvedFn<T> | ((config: AxiosRequestConfig) => AxiosPromise)
   rejected?: RejectedFn
 }
 
@@ -28,7 +28,7 @@ export default class Axios implements AxiosType {
       config = url
     }
 
-    const chain: PromiseChain[] = [{
+    const chain: PromiseChain<any>[] = [{
       resolved: dispatchRequest,
       rejected: undefined,
     }]
