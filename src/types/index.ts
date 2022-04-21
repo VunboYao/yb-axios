@@ -23,6 +23,8 @@ export interface AxiosRequestConfig {
   headers?: any // 请求头信息：Content-Type：application/json;charset=utf-8 声明等
   responseType?: XMLHttpRequestResponseType // 接收的返回数据类型 "" | "arraybuffer" | "blob" | "document" | "json" | "text"
   timeout?: number // 超时时间 ms
+
+  [propName: string]: any
 }
 
 export interface AxiosResponse<T = any> {
@@ -50,6 +52,7 @@ export interface AxiosError extends Error {
 }
 
 export interface Axios {
+  defaults: AxiosRequestConfig
   interceptors: Interceptors
 
   request<T = any>(config: AxiosRequestConfig): AxiosPromise<T>
