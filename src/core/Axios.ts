@@ -2,6 +2,7 @@ import type { AxiosPromise, AxiosRequestConfig, Axios as AxiosType, Interceptors
 import type { AxiosResponse } from './../../src-origin/types/index'
 import dispatchRequest from './dispatchRequest'
 import InterceptorManager from './interceptorManager'
+import mergeConfig from './mergeConfig'
 
 interface PromiseChain<T> {
   resolved: ResolvedFn<T> | ((config: AxiosRequestConfig) => AxiosPromise)
@@ -29,6 +30,8 @@ export default class Axios implements AxiosType {
     } else {
       config = url
     }
+
+    config = mergeConfig(this.defaults, config)
 
     const chain: PromiseChain<any>[] = [{
       resolved: dispatchRequest,

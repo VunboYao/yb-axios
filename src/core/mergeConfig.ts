@@ -1,3 +1,4 @@
+import { deepMerge, isObject } from '../helpers/util'
 import type { AxiosRequestConfig } from './../types/index'
 
 // 合并策略的 map
@@ -19,6 +20,23 @@ function fromVal2Strat(val1: any, val2: any): any {
 const stratKeysFromVal2 = ['url', 'params', 'data']
 stratKeysFromVal2.forEach((key) => {
   strats[key] = fromVal2Strat
+})
+
+function deepMergeStrat(val1: any, val2: any): any {
+  if (isObject(val2)) {
+    return deepMerge(val1, val2)
+  } else if (typeof val2 !== 'undefined') {
+    return val2
+  } else if (isObject(val1)) {
+    return deepMerge(val1)
+  } else if (typeof val1 !== 'undefined') {
+    return val1
+  }
+}
+
+const stratKeysDeepMerge = ['headers']
+stratKeysDeepMerge.forEach((key) => {
+  strats[key] = deepMergeStrat
 })
 
 /*
