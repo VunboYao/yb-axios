@@ -28,6 +28,7 @@ export interface AxiosRequestConfig {
 
   transformRequest?: AxiosTransformer | AxiosTransformer[]
   transformResponse?: AxiosTransformer | AxiosTransformer[]
+  cancelToken?: CancelToken
 }
 
 export interface AxiosTransformer {
@@ -102,4 +103,20 @@ export interface RejectedFn {
 export interface Interceptors {
   request: InterceptorManager<AxiosRequestConfig>
   response: InterceptorManager<AxiosResponse>
+}
+
+// 实例类型的接口定义
+export interface CancelToken {
+  promise: Promise<string>
+  reason?: string
+}
+
+// 取消方法的接口定义
+export interface Canceler {
+  (message?: string): void
+}
+
+// CancelToken 类构造函数参数的接口定义
+export interface CancelExecutor {
+  (cancel: Canceler): void
 }
