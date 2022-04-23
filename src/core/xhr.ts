@@ -1,4 +1,3 @@
-import { transformResponse } from '../helpers/data'
 import { parseHeaders } from '../helpers/headers'
 import type { AxiosPromise, AxiosRequestConfig, AxiosResponse } from '../types'
 import { createError } from '../helpers/error'
@@ -44,7 +43,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
       const responseHeaders = parseHeaders(request.getAllResponseHeaders())
       const responseData = responseType !== 'text' ? request.response : request.responseText
       const response: AxiosResponse = {
-        data: transformResponse(responseData),
+        data: responseData,
         status: request.status,
         statusText: request.statusText, // HTTP状态
         headers: responseHeaders, // 响应的HTTP状态描述

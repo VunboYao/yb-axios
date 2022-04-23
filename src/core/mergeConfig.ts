@@ -22,6 +22,7 @@ stratKeysFromVal2.forEach((key) => {
   strats[key] = fromVal2Strat
 })
 
+// 复杂对象 headers
 function deepMergeStrat(val1: any, val2: any): any {
   if (isObject(val2)) {
     return deepMerge(val1, val2)

@@ -25,6 +25,13 @@ export interface AxiosRequestConfig {
   timeout?: number // 超时时间 ms
 
   [propName: string]: any
+
+  transformRequest?: AxiosTransformer | AxiosTransformer[]
+  transformResponse?: AxiosTransformer | AxiosTransformer[]
+}
+
+export interface AxiosTransformer {
+  (data: any, headers?: any): any
 }
 
 export interface AxiosResponse<T = any> {
