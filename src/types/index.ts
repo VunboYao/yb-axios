@@ -109,7 +109,7 @@ export interface Interceptors {
   response: InterceptorManager<AxiosResponse>
 }
 
-// 实例类型的接口定义
+// 实例类型的类接口定义
 export interface CancelToken {
   promise: Promise<Cancel>
   reason?: Cancel
