@@ -1,21 +1,21 @@
-import axios, { AxiosError } from '../../src/index'
 import qs from 'qs'
+import axios, { AxiosError } from '../../src/index'
 //
 // import 'nprogress/nprogress.css'
 //
 // import NProgress from 'nprogress'
 
-// document.cookie = 'a=b'
-//
-// axios.get('/more/get').then(res => {
-//   console.log(res)
-// })
-//
-// axios.post('http://127.0.0.1:8088/more/server2', {}, {
-//   withCredentials: true
-// }).then(res => {
-//   console.log(res)
-// // })
+document.cookie = 'a=b12'
+
+axios.get('/more/get').then((res) => {
+  console.log(res)
+})
+
+axios.post('http://127.0.0.1:8088/more/server2', {}, {
+  withCredentials: true,
+}).then((res) => {
+  console.log(res)
+})
 //
 // // const instance = axios.create({
 // //   xsrfCookieName: 'XSRF-TOKEN-D',
@@ -94,7 +94,6 @@ import qs from 'qs'
 //   console.log(res)
 // })
 
-
 // axios.get('/more/304').then(res => {
 //   console.log(res)
 // }).catch((e: AxiosError) => {
@@ -150,7 +149,7 @@ import qs from 'qs'
 // instance.get('5cc01a7b0001a33718720632.jpg')
 //
 // instance.get('https://img.mukewang.com/szimg/5becd5ad0001b89306000338-360-202.jpg')
-
+/*
 function getA() {
   return axios.get('/more/A')
 }
@@ -180,4 +179,4 @@ const fakeConfig = {
     testString: 'thisIsATest'
   }
 }
-console.log(axios.getUri(fakeConfig))
+console.log(axios.getUri(fakeConfig)) */

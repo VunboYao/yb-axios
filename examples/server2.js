@@ -14,15 +14,15 @@ const cors = {
   'Access-Control-Allow-Origin': 'http://localhost:8080',
   'Access-Control-Allow-Credentials': true,
   'Access-Control-Allow-Methods': 'POST, GET, PUT, DELETE, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type'
+  'Access-Control-Allow-Headers': 'Content-Type',
 }
 
-router.post('/more/server2', function(req, res) {
+router.post('/more/server2', (req, res) => {
   res.set(cors)
   res.json(req.cookies)
 })
 
-router.options('/more/server2', function(req, res) {
+router.options('/more/server2', (req, res) => {
   res.set(cors)
   res.end()
 })

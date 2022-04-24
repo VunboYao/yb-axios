@@ -12,6 +12,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
       responseType,
       timeout,
       cancelToken,
+      withCredentials,
     } = config
 
     // todo:1-创建xhr实例
@@ -88,6 +89,11 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
         request.abort()
         reject(reason)
       })
+    }
+
+    // todo:9-withCredentials
+    if (withCredentials) {
+      request.withCredentials = withCredentials
     }
 
     // todo:2-method大写，是否执行异步操作，默认true
