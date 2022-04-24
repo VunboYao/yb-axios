@@ -1,6 +1,8 @@
 import { parseHeaders } from '../helpers/headers'
 import type { AxiosPromise, AxiosRequestConfig, AxiosResponse } from '../types'
 import { createError } from '../helpers/error'
+import { isURLSameOrigin } from '../helpers/url'
+import cookie from '../helpers/cookie'
 
 export default function xhr(config: AxiosRequestConfig): AxiosPromise {
   return new Promise((resolve, reject) => {
@@ -13,6 +15,8 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
       timeout,
       cancelToken,
       withCredentials,
+      xsrfCookieName,
+      xsrfHeaderName,
     } = config
 
     // todo:1-创建xhr实例
@@ -94,6 +98,14 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
     // todo:9-withCredentials
     if (withCredentials) {
       request.withCredentials = withCredentials
+    }
+
+    // todo:10-token的处理
+    if ((withCredentials || isURLSameOrigin(url!)) && xsrfCookieName) {
+      const xsrfValue = cookie.read(xsrfCookieName)
+      if (xsrfValue && xsrfHeaderName) {
+        headers[xsrfHeaderName] = xsrfValue
+      }
     }
 
     // todo:2-method大写，是否执行异步操作，默认true
