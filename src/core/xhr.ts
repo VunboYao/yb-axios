@@ -20,6 +20,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
       xsrfHeaderName,
       onDownloadProgress,
       onUploadProgress,
+      auth,
     } = config
 
     // todo:1-创建xhr实例
@@ -120,6 +121,10 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
         if (xsrfValue && xsrfHeaderName) {
           headers[xsrfHeaderName] = xsrfValue
         }
+      }
+
+      if (auth) {
+        headers.Authorization = `Basic ${btoa(`${auth.username}:${auth.password}`)}`
       }
 
       // todo:3-setRequestHeader 只能在 open 和 send 之间调用

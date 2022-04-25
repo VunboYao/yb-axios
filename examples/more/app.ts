@@ -25,6 +25,7 @@ axios.post('http://127.0.0.1:8088/more/server2', {}, {
 instance.get('/more/get').then((res) => {
   console.log(res)
 }) */
+/*
 const instance = axios.create()
 
 function calculatePercentage(loaded: number, total: number) {
@@ -82,17 +83,17 @@ uploadEl!.addEventListener('click', (e) => {
     instance.post('/more/upload', data)
   }
 })
-
-// axios.post('/more/post', {
-//   a: 1
-// }, {
-//   auth: {
-//     username: 'Yee',
-//     password: '123456'
-//   }
-// }).then(res => {
-//   console.log(res)
-// })
+*/
+axios.post('/more/post', {
+  a: 1,
+}, {
+  auth: {
+    username: 'Yee',
+    password: '123456',
+  },
+}).then((res) => {
+  console.log(res)
+})
 
 // axios.get('/more/304').then(res => {
 //   console.log(res)
