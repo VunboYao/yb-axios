@@ -112,7 +112,7 @@ axios.get('/more/304', {
   console.log(e.message)
 }) */
 
-axios.get('/more/get', {
+/* axios.get('/more/get', {
   params: new URLSearchParams('a=b&c=d'),
 }).then((res) => {
   console.log(res)
@@ -143,15 +143,14 @@ instance.get('/more/get', {
   },
 }).then((res) => {
   console.log(res)
+}) */
+
+const instance = axios.create({
+  baseURL: 'https://images.unsplash.com/',
 })
 
-// const instance = axios.create({
-//   baseURL: 'https://img.mukewang.com/'
-// })
-//
-// instance.get('5cc01a7b0001a33718720632.jpg')
-//
-// instance.get('https://img.mukewang.com/szimg/5becd5ad0001b89306000338-360-202.jpg')
+instance.get('photo-1650852826322-ebc34010f0a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw1fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=700&q=60')
+instance.get('https://images.unsplash.com/photo-1650861509880-ef1a5ef99436?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=700&q=60')
 /*
 function getA() {
   return axios.get('/more/A')
