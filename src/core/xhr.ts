@@ -21,6 +21,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
       onDownloadProgress,
       onUploadProgress,
       auth,
+      validateStatus,
     } = config
 
     // todo:1-创建xhr实例
@@ -148,14 +149,18 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
     }
 
     function handleResponse(response: AxiosResponse): void {
-      if (response.status >= 200 && response.status < 300) {
+      if (!validateStatus || validateStatus(response.status)) {
         resolve(response)
       } else {
-        reject(createError(`Request failed with status code ${response.status}`,
-          config,
-          null,
-          request,
-          response))
+        reject(
+          createError(
+            `Request failed with status code ${response.status}`,
+            config,
+            null,
+            request,
+            response,
+          ),
+        )
       }
     }
   })
