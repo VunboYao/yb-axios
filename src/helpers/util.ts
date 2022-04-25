@@ -16,6 +16,10 @@ export function isDate(val: any): val is Date {
 export function isObject(val: any): val is Object {
   return getType(val) === 'object'
 }
+export function isFormData(val: any): boolean {
+  // return typeof val !== 'undefined' && val instanceof DormData
+  return getType(val) === 'formdata'
+}
 
 export function extend<T, U>(to: T, from: U): T & U {
   for (const key in from) {
