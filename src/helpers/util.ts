@@ -21,6 +21,10 @@ export function isFormData(val: any): boolean {
   return getType(val) === 'formdata'
 }
 
+export function isURLSearchParams(val: any): val is URLSearchParams {
+  return getType(val) === 'urlsearchparams'
+}
+
 export function extend<T, U>(to: T, from: U): T & U {
   for (const key in from) {
     (to as T & U)[key] = from[key] as any

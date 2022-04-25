@@ -1,4 +1,4 @@
-import { isDate, isObject } from './util'
+import { isDate, isObject, isURLSearchParams } from './util'
 
 /*
 * 参数值为数组：/base/get?foo[]=bar&foo[]=baz
@@ -9,45 +9,56 @@ import { isDate, isObject } from './util'
 * 丢弃 url 中的哈希标记：#hash移除
 * 保留url中已存在的参数
 */
-export function buildUrl(url: string, params?: any): string {
+export function buildUrl(
+  url: string,
+  params?: any,
+  paramsSerializer?: (params: any) => string,
+): string {
   // 无参数则退出
   if (!params) {
     return url
   }
 
-  // 参数放入一个数组中，方便后续处理
-  const parts: string[] = []
-  Object.keys(params).forEach((key) => {
-    const val = params[key]
-    // todo:val值为 null 或 undefined
-    if (val === null || typeof val === 'undefined') {
-      return
-    }
-
-    let values = []
-    // todo: val值为数组时，key值处理
-    if (Array.isArray(val)) {
-      values = val
-      key += '[]'
-    } else {
-      values = [val]
-    }
-
-    values.forEach((val) => {
-      // todo: val为date类型时
-      if (isDate(val)) {
-        val = val.toISOString()
-      } else if (isObject(val)) {
-        // todo: val 是 object，序列化处理
-        val = JSON.stringify(val)
+  let serializedParams
+  if (paramsSerializer) {
+    serializedParams = paramsSerializer(params)
+  } else if (isURLSearchParams(params)) {
+    serializedParams = params.toString()
+  } else {
+    // 参数放入一个数组中，方便后续处理
+    const parts: string[] = []
+    Object.keys(params).forEach((key) => {
+      const val = params[key]
+      // todo:val值为 null 或 undefined
+      if (val === null || typeof val === 'undefined') {
+        return
       }
 
-      // todo:保留部分特殊字符处理
-      parts.push(`${encode(key)}=${encode(val)}`)
-    })
-  })
+      let values = []
+      // todo: val值为数组时，key值处理
+      if (Array.isArray(val)) {
+        values = val
+        key += '[]'
+      } else {
+        values = [val]
+      }
 
-  const serializedParams = parts.join('&')
+      values.forEach((val) => {
+      // todo: val为date类型时
+        if (isDate(val)) {
+          val = val.toISOString()
+        } else if (isObject(val)) {
+        // todo: val 是 object，序列化处理
+          val = JSON.stringify(val)
+        }
+
+        // todo:保留部分特殊字符处理
+        parts.push(`${encode(key)}=${encode(val)}`)
+      })
+    })
+    serializedParams = parts.join('&')
+  }
+
   if (serializedParams) {
     // todo: hash（#）值去除
     const markIndex = url.indexOf('#')

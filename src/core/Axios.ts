@@ -1,5 +1,13 @@
-import type { AxiosPromise, AxiosRequestConfig, Axios as AxiosType, Interceptors, Method, RejectedFn, ResolvedFn } from '../types'
-import type { AxiosResponse } from './../../src-origin/types/index'
+import type {
+  AxiosPromise,
+  AxiosRequestConfig,
+  AxiosResponse,
+  Axios as AxiosType,
+  Interceptors,
+  Method,
+  RejectedFn,
+  ResolvedFn,
+} from '../types'
 import dispatchRequest from './dispatchRequest'
 import InterceptorManager from './interceptorManager'
 import mergeConfig from './mergeConfig'
@@ -32,7 +40,6 @@ export default class Axios implements AxiosType {
     }
 
     config = mergeConfig(this.defaults, config)
-
     const chain: PromiseChain<any>[] = [{
       resolved: dispatchRequest,
       rejected: undefined,
