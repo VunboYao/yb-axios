@@ -145,13 +145,13 @@ instance.get('/more/get', {
   console.log(res)
 }) */
 
-const instance = axios.create({
+/* const instance = axios.create({
   baseURL: 'https://images.unsplash.com/',
 })
 
 instance.get('photo-1650852826322-ebc34010f0a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw1fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=700&q=60')
-instance.get('https://images.unsplash.com/photo-1650861509880-ef1a5ef99436?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=700&q=60')
-/*
+instance.get('https://images.unsplash.com/photo-1650861509880-ef1a5ef99436?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=700&q=60') */
+
 function getA() {
   return axios.get('/more/A')
 }
@@ -161,7 +161,7 @@ function getB() {
 }
 
 axios.all([getA(), getB()])
-  .then(axios.spread(function(resA, resB) {
+  .then(axios.spread((resA, resB) => {
     console.log(resA.data)
     console.log(resB.data)
   }))
@@ -178,7 +178,7 @@ const fakeConfig = {
   params: {
     idClient: 1,
     idTest: 2,
-    testString: 'thisIsATest'
-  }
+    testString: 'thisIsATest',
+  },
 }
-console.log(axios.getUri(fakeConfig)) */
+console.log(axios.getUri(fakeConfig))
