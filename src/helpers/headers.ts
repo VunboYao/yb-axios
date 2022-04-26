@@ -1,4 +1,4 @@
-import type { Method } from './../../src-origin/types/index'
+import type { Method } from '../../src/types/index'
 import { deepMerge, isObject } from './util'
 export function processHeaders(headers: any, data: any): any {
   if (isObject(data)) {
