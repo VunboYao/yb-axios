@@ -50,7 +50,7 @@
       ".(ts|tsx)": "ts-jest"
     },
     "testEnvironmentOptions": {
-      "testEnvironment": "jsdom"
+      "environment": "jsdom"
     },
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts)$",
     "moduleFileExtensions": [
@@ -107,7 +107,7 @@
     "husky": "^1.0.1",
     "jest": "^27.5.1",
     "jest-config": "^27.5.1",
-    "jest-environment-jsdom": "^28.0.1",
+    "jest-environment-jsdom": "^27.5.1",
     "lint-staged": "^8.0.0",
     "lodash.camelcase": "^4.3.0",
     "nprogress": "^0.2.0",
