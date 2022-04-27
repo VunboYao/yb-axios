@@ -1,4 +1,6 @@
-import { deepMerge, extend, isDate, isFormData, isObject, isURLSearchParams } from '../../src/helpers/util'
+import { JSDOM } from 'jsdom'
+import { combineURL, deepMerge, extend, getType, isAbsoluteURL, isDate, isFormData, isObject, isURLSearchParams } from '../../src/helpers/util'
+const jsdom = new JSDOM()
 describe('helpers: util', () => {
   describe('isXX', () => {
     test('should validate Date', () => {
@@ -10,9 +12,8 @@ describe('helpers: util', () => {
       expect(isObject({})).toBeTruthy()
       expect(isObject(new Date())).toBeFalsy()
     })
-
     test('should validate FormData', () => {
-      expect(isFormData(new FormData())).toBeTruthy()
+      expect(isFormData(new jsdom.window.FormData())).toBeTruthy()
       expect(isFormData({})).toBeFalsy()
     })
 
@@ -97,6 +98,19 @@ describe('helpers: util', () => {
       expect(deepMerge(null, null)).toEqual({})
       expect(deepMerge(null, { foo: 123 })).toEqual({ foo: 123 })
       expect(deepMerge({ foo: 123 }, null)).toEqual({ foo: 123 })
+    })
+  })
+
+  describe('OtherTools', () => {
+    test('getType', () => {
+      expect(getType({})).toBe('object')
+    })
+    test('isAbsoluteURL', () => {
+      expect(isAbsoluteURL('http://www.baidu.com')).toBeTruthy()
+    })
+    test('combineURL', () => {
+      expect(combineURL('http://www.baidu.com/', '/123/2222')).toBe('http://www.baidu.com/123/2222')
+      expect(combineURL('http://123')).toBe('http://123')
     })
   })
 })
