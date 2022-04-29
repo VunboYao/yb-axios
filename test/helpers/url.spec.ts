@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import { buildUrl } from '../../src/helpers/url'
+import { buildUrl, isURLSameOrigin } from '../../src/helpers/url'
 import { combineURL, isAbsoluteURL } from '../../src/helpers/util'
 describe('helpers:url', () => {
   describe('buildUrl', () => {
@@ -108,6 +108,33 @@ describe('helpers:url', () => {
   describe('combineURL', () => {
     test('should combine URL', () => {
       expect(combineURL('https://api.github.com', '/users')).toBe('https://api.github.com/users')
+    })
+
+    test('should remove duplicate slashes', () => {
+      expect(combineURL('https://api.github.com/', '/users')).toBe('https://api.github.com/users')
+    })
+
+    test('should insert missing slash', () => {
+      expect(combineURL('https://api.github.com', 'users')).toBe('https://api.github.com/users')
+    })
+
+    test('should not insert slash when relative url missing/empty', () => {
+      expect(combineURL('https://api.github.com/users', '')).toBe('https://api.github.com/users')
+    })
+
+    test('should allow a single slash for relative url', () => {
+      expect(combineURL('https://api.github.com/users', '/')).toBe('https://api.github.com/users/')
+    })
+  })
+
+
+  describe('isURLSameOrigin', () => {
+    test('should detect same origin', () => {
+      expect(isURLSameOrigin(window.location.href)).toBeTruthy()
+    })
+
+    test('should detect different origin', () => {
+      expect(isURLSameOrigin('https://github.com/axios/axios')).toBeFalsy()
     })
   })
 })
